@@ -1,0 +1,586 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2566">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Supportive Health Educator AI&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f4f8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chat-bubble {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 85%;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>word-wrap: break-word;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.user-bubble {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #3b82f6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-self: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom-right-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.ai-bubble {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e2e8f0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #1e293b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-self: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom-left-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chat-container::-webkit-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chat-container::-webkit-scrollbar-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #cbd5e1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chat-container::-webkit-scrollbar-track {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f4f8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.message-box-overlay {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(0, 0, 0, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.message-box-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 90%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 400px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.message-box-button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #3b82f6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.quiz-option-button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #cbd5e1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.quiz-option-button:hover:not(:disabled) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eff6ff;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.quiz-option-button:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.7;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.action-button {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #10b981;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.875rem;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.action-button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #059669;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.action-button:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #6ee7b7;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="flex flex-col items-center justify-center min-h-screen p-4"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="bg-white shadow-xl rounded-lg w-full max-w-2xl flex flex-col h-[90vh] md:h-[85vh]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="bg-blue-600 text-white p-4 rounded-t-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-2xl font-semibold text-center"&gt;Supportive Health Educator AI&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="ageSelectionScreen" class="flex flex-col items-center justify-center p-6 space-y-4 flex-grow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-medium text-gray-700"&gt;Please select your age group:&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;select id="ageGroupSelect" class="p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full max-w-xs text-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value=""&gt;-- Select Age Group --&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="10-13"&gt;10-13 years old&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="14-17"&gt;14-17 years old&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;option value="18+"&gt;18+ years old&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="startChatButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out text-lg" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Start Chat</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-xs text-gray-500 mt-4 text-center max-w-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>This AI provides information for educational purposes. It is not a substitute for professional medical advice.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="chatInterface" class="hidden flex flex-col flex-grow overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="chatContainer" class="flex-grow p-4 space-y-2 overflow-y-auto chat-container bg-slate-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Chat messages and quizzes will be appended here --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="typingIndicator" class="p-4 text-sm text-gray-500 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse delay-75"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse delay-150"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse delay-300"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span&gt;AI is thinking...&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="p-4 border-t border-gray-200 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex items-center space-x-2 mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="text" id="userInput" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Ask a question or pick a topic..."&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="sendMessageButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-3 rounded-lg shadow-md transition duration-150 ease-in-out"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex justify-start space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>&lt;button id="requestQuizButton" class="action-button"&gt;Request Quiz&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;footer id="chatFooter" class="hidden bg-gray-100 text-gray-600 p-3 text-xs text-center border-t border-gray-200 rounded-b-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>This AI is for educational purposes and not a substitute for professional medical advice.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="changeAgeButton" class="ml-2 text-blue-500 hover:underline text-xs"&gt;(Change Age Group)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="customMessageBox" class="message-box-overlay hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="message-box-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="messageBoxText"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="messageBoxOkButton" class="message-box-button"&gt;OK&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ageGroupSelect = document.getElementById('ageGroupSelect');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const startChatButton = document.getElementById('startChatButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ageSelectionScreen = document.getElementById('ageSelectionScreen');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const chatInterface = document.getElementById('chatInterface');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const chatContainer = document.getElementById('chatContainer');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const userInput = document.getElementById('userInput');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const sendMessageButton = document.getElementById('sendMessageButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const requestQuizButton = document.getElementById('requestQuizButton');<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const typingIndicator = document.getElementById('typingIndicator');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const chatFooter = document.getElementById('chatFooter');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const changeAgeButton = document.getElementById('changeAgeButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const customMessageBox = document.getElementById('customMessageBox');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const messageBoxText = document.getElementById('messageBoxText');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const messageBoxOkButton = document.getElementById('messageBoxOkButton');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentAgeGroup = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let chatHistory = [];</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentQuizData = null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentQuizQuestionIndex = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let quizScore = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let incorrectQuizAnswers = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const QUIZ_RESPONSE_SCHEMA = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"type": "OBJECT",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"properties": {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>"type": {"type": "STRING", "enum": ["quiz"]},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>"quizTitle": { "type": "STRING" },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>"questions": {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>"type": "ARRAY",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>"minItems": 1,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>"items": {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>"type": "OBJECT",</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>"properties": {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>"questionText": { "type": "STRING" },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>"options": { "type": "ARRAY", "minItems": 2, "maxItems": 4, "items": { "type": "STRING" } },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>"correctAnswerIndex": { "type": "INTEGER" },</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>"explanation": {"type": "STRING"}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>"required": ["questionText", "options", "correctAnswerIndex", "explanation"]</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"required": ["type", "quizTitle", "questions"]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showMessageBox(message) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>messageBoxText.textContent = message;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>customMessageBox.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>messageBoxOkButton.addEventListener('click', () =&gt; customMessageBox.classList.add('hidden'));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>ageGroupSelect.addEventListener('change', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.disabled = !ageGroupSelect.value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.classList.toggle('bg-green-500', !!ageGroupSelect.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.classList.toggle('hover:bg-green-600', !!ageGroupSelect.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.classList.toggle('bg-blue-500', !ageGroupSelect.value);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.classList.toggle('hover:bg-blue-600', !ageGroupSelect.value);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>startChatButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentAgeGroup = ageGroupSelect.value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!currentAgeGroup) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showMessageBox("Please select an age group to start the chat.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ageSelectionScreen.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatInterface.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatInterface.classList.add('flex');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatFooter.classList.remove('hidden');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let welcomeMessage = `Hello! I'm glad you're here to learn more about health and your body. `;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let topics = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (currentAgeGroup === "10-13") topics = ["changes during puberty", "personal hygiene", "understanding emotions"];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (currentAgeGroup === "14-17") topics = ["healthy relationships", "contraception basics", "STIs and prevention"];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if (currentAgeGroup === "18+") topics = ["detailed contraception options", "sexual well-being", "family planning"];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>welcomeMessage += `For the ${currentAgeGroup} age group, we could explore topics such as "${topics[0]}", "${topics[1]}", or "${topics[2]}". You can also ask me any specific questions you have, or click 'Request Quiz' if you'd like to test your knowledge. What sounds most interesting to you, or where would you like to start? Remember, I'm for education, not medical diagnosis.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>addTextMessageToChat("AI", welcomeMessage);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory = [{ role: "model", parts: [{ text: welcomeMessage }] }];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>changeAgeButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatInterface.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatInterface.classList.remove('flex');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatFooter.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ageSelectionScreen.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentAgeGroup = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ageGroupSelect.value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>startChatButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resetQuizState();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>sendMessageButton.addEventListener('click', handleSendMessage);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>userInput.addEventListener('keypress', (e) =&gt; { if (e.key === 'Enter') handleSendMessage(); });</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>requestQuizButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (userInput.disabled) return;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const quizRequestText = "/request_quiz";<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>addTextMessageToChat("User", "I'd like to take a quiz.");<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.value = '';<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>showTypingIndicator(true);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory.push({ role: "user", parts: [{ text: quizRequestText }] });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>getAIResponse(quizRequestText);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleSendMessage() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const messageText = userInput.value.trim();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!messageText || userInput.disabled) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>addTextMessageToChat("User", messageText);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>showTypingIndicator(true);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory.push({ role: "user", parts: [{ text: messageText }] });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>getAIResponse(messageText);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addTextMessageToChat(sender, message) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bubble = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bubble.classList.add('chat-bubble', sender === "User" ? 'user-bubble' : 'ai-bubble');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const messageContent = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>messageContent.textContent = message;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>bubble.appendChild(messageContent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.appendChild(bubble);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.scrollTop = chatContainer.scrollHeight;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function showTypingIndicator(show) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>typingIndicator.classList.toggle('hidden', !show);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.disabled = show;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>sendMessageButton.disabled = show;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>requestQuizButton.disabled = show;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resetQuizState() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentQuizData = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentQuizQuestionIndex = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>quizScore = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>incorrectQuizAnswers = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>sendMessageButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>requestQuizButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function displayQuiz(quizData) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>resetQuizState();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentQuizData = quizData;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const titleBubble = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>titleBubble.classList.add('chat-bubble', 'ai-bubble', 'font-semibold', 'text-lg', 'mb-3');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>titleBubble.textContent = quizData.quizTitle || "Here's a quick quiz for you:";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.appendChild(titleBubble);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.scrollTop = chatContainer.scrollHeight;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>displayCurrentQuizQuestion();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function displayCurrentQuizQuestion() {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!currentQuizData || currentQuizQuestionIndex &gt;= currentQuizData.questions.length) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>endQuiz();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const questionObj = currentQuizData.questions[currentQuizQuestionIndex];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const questionBubble = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionBubble.classList.add('chat-bubble', 'ai-bubble');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const questionTextDiv = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionTextDiv.textContent = `Question ${currentQuizQuestionIndex + 1} of ${currentQuizData.questions.length}: ${questionObj.questionText}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionTextDiv.classList.add('mb-3', 'font-medium');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionBubble.appendChild(questionTextDiv);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const optionsDiv = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>optionsDiv.classList.add('space-y-2');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionObj.options.forEach((option, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const optionButton = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionButton.textContent = option;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionButton.classList.add('quiz-option-button');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionButton.dataset.optionIndex = index;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionButton.onclick = () =&gt; handleQuizAnswer(index, questionObj, optionsDiv);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionsDiv.appendChild(optionButton);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionBubble.appendChild(optionsDiv);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.appendChild(questionBubble);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.scrollTop = chatContainer.scrollHeight;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.disabled = true;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>sendMessageButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>requestQuizButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleQuizAnswer(selectedIndex, questionObj, optionsContainer) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>optionsContainer.querySelectorAll('button').forEach(btn =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (parseInt(btn.dataset.optionIndex) === questionObj.correctAnswerIndex) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.classList.add('bg-green-200', 'border-green-400', 'font-semibold');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (parseInt(btn.dataset.optionIndex) === selectedIndex) {</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>btn.classList.add('bg-red-200', 'border-red-400', 'font-semibold');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const feedbackBubble = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>feedbackBubble.classList.add('chat-bubble', 'ai-bubble', 'mt-1', 'p-3');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let feedbackText = "";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (selectedIndex === questionObj.correctAnswerIndex) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>quizScore++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedbackText = `Correct! ${questionObj.explanation}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedbackBubble.classList.add('bg-green-50', 'border', 'border-green-300');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedbackText = `Not quite. The correct answer was: "${questionObj.options[questionObj.correctAnswerIndex]}". ${questionObj.explanation}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>feedbackBubble.classList.add('bg-red-50', 'border', 'border-red-300');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>incorrectQuizAnswers.push({</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>question: questionObj.questionText,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>userAnswer: questionObj.options[selectedIndex],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>correctAnswer: questionObj.options[questionObj.correctAnswerIndex],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>explanation: questionObj.explanation,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>feedbackBubble.textContent = feedbackText;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.appendChild(feedbackBubble);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatContainer.scrollTop = chatContainer.scrollHeight;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentQuizQuestionIndex++;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>displayCurrentQuizQuestion();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 3500);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function endQuiz() {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let summaryMessage = `Quiz finished! You scored ${quizScore} out of ${currentQuizData.questions.length}.`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>addTextMessageToChat("AI", summaryMessage);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>userInput.disabled = false;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>sendMessageButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>requestQuizButton.disabled = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (incorrectQuizAnswers.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const incorrectTopicsSummary = incorrectQuizAnswers.map(item =&gt; item.question).join('; ');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const retrainingOfferPrompt = `/offer_retraining_for: ${incorrectTopicsSummary}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>chatHistory.push({ role: "model", parts: [{ text: `User had difficulty with: ${incorrectTopicsSummary}. I should offer to review these topics.` }] });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>getAIResponse(retrainingOfferPrompt);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>addTextMessageToChat("AI", "Great job on the quiz! Feel free to ask more questions or request another quiz on a different topic whenever you're ready.");</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>chatHistory.push({ role: "model", parts: [{ text: "User did well on quiz. Encourage further questions or new quiz." }] });</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>resetQuizState();<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function getAIResponse(userMessage) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const systemInstruction = `You are a highly supportive, empathetic, and non-judgmental AI assistant for sexual health education for in-patients. Age group: ${currentAgeGroup}.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Your tone: calming, understanding, respectful. Tailor responses to this age group.</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Guidelines:</p>
+<p class="p1"><span class="Apple-converted-space">            </span>1.<span class="Apple-converted-space">  </span>Age Appropriateness: [10-13: puberty, hygiene, emotions, boundaries, trusted adults. Offer topics: "puberty changes," "hygiene," "emotions."]; [14-17: anatomy, contraception overview, STIs basics, consent, healthy relationships. Offer topics: "healthy relationships," "contraception," "STIs."]; [18+: comprehensive sexual health, detailed contraception, STIs, family planning, consent. Offer topics: "contraception options," "sexual well-being," "family planning."]</p>
+<p class="p1"><span class="Apple-converted-space">            </span>2.<span class="Apple-converted-space">  </span>Supportive &amp; Non-Judgmental: Validate questions. No shaming/blaming.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>3.<span class="Apple-converted-space">  </span>Factual &amp; Clear: Medically accurate. Simplify complex topics.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>4.<span class="Apple-converted-space">  </span>Safety &amp; Boundaries: NO medical advice/diagnosis. Refer to doctors for symptoms. NO explicit/erotic content. Redirect inappropriate queries.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>5.<span class="Apple-converted-space">  </span>Encourage Professional Consultation: Remind you're for education; consult professionals for personal health.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>6.<span class="Apple-converted-space">  </span>Proactive Guidance: If user unsure, suggest relevant topics.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>7.<span class="Apple-converted-space">  </span>Quiz Workflow:</p>
+<p class="p1"><span class="Apple-converted-space">                </span>a. Offering Quiz (General): After explaining a concept or if user seems to understand a topic well, you can OFFER a short 2-3 question multiple-choice quiz on that topic. E.g., "We've covered [topic]. Would you like a quick quiz to check your understanding?"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>b. User Request for Quiz (Button): If user message is "/request_quiz", this means they clicked the 'Request Quiz' button. Respond by asking what topic they'd like the quiz on, or if they want a general one based on recent discussion. E.g., "Sure, I can give you a quiz! What topic are you interested in, or should I make a general one based on what we've been talking about?"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>c. Generating Quiz: If user agrees to an offered quiz, OR specifies a topic for a requested quiz (e.g., "quiz me on puberty", or "yes, on puberty" after you asked for a topic), then generate the quiz. Your response MUST be ONLY a valid JSON object adhering to the schema.</p>
+<p class="p1"><span class="Apple-converted-space">                   </span>The entire text part of your response must be this JSON.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>d. Failed Quiz Generation: If you cannot generate a quiz as JSON (e.g., topic too vague for a quiz), explain why in plain text and perhaps suggest discussing the topic more first.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>8.<span class="Apple-converted-space">  </span>Retraining After Quiz:</p>
+<p class="p1"><span class="Apple-converted-space">                </span>a. System Signal for Retraining: If the user message is "/offer_retraining_for: [summary of incorrect topics]", this is a signal from the application. Your response should be a user-facing message offering to review the topics mentioned. E.g., "It looks like there were a few areas we could review, such as [summary of incorrect topics]. I can provide some more information on these, and then we can try another short quiz on just those parts. Would you like to do that?"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>b. User Agrees to Retraining: If the user then says "yes" (or similar affirmative) to your offer to retrain, your next response should be the textual explanation/review of those specific topics.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>c. Offer Follow-up Quiz: After providing the textual retraining, you MUST then offer a NEW, short (1-2 questions) quiz specifically on these corrected topics. E.g., "Now that we've reviewed that, would you like a quick quiz on [specific retrained topics]?"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>d. Generating Follow-up Quiz: If the user agrees to this new quiz offer, generate this new targeted quiz using the JSON format.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>9.<span class="Apple-converted-space">  </span>Strict JSON Adherence: When "responseMimeType" is "application/json" (which the app will set for quiz generation), your *entire response part* MUST be *only* the JSON string. No conversational text before or after the JSON.</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>Respond to the user's message ("${userMessage}") based on these guidelines and our chat history.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let expectQuizJSON = false;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const lastModelResponseText = chatHistory.filter(m =&gt; m.role === 'model').pop()?.parts[0]?.text.toLowerCase() || "";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const userAffirmative = userMessage.toLowerCase().match(/\b(yes|ok|sure|yeah|please|sounds good|go ahead|yep|yup)\b/i);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if ( (lastModelResponseText.includes("would you like a quick quiz") &amp;&amp; userAffirmative) ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                 </span>(lastModelResponseText.includes("what topic are you interested in") &amp;&amp; !userMessage.startsWith("/") &amp;&amp; userMessage.trim() !== "") ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                 </span>(lastModelResponseText.includes("would you like a quick quiz on") &amp;&amp; userAffirmative) ||<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                 </span>(userMessage.toLowerCase().startsWith("quiz me on ") &amp;&amp; userMessage.length &gt; "quiz me on ".length)<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expectQuizJSON = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (lastModelResponseText.includes("would you like to do that?") &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>lastModelResponseText.includes("areas we could review") &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>userAffirmative &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>!userMessage.startsWith("/request_quiz")) {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>expectQuizJSON = false;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (userMessage.startsWith("/offer_retraining_for:")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expectQuizJSON = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const historyForAPI = [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ role: "user", parts: [{ text: systemInstruction }] },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ role: "model", parts: [{ text: "Understood. I will follow these guidelines meticulously." }] }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>].concat(chatHistory.slice(-10));<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>contents: historyForAPI</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (expectQuizJSON) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>payload.generationConfig = {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>"responseMimeType": "application/json",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>"responseSchema": QUIZ_RESPONSE_SCHEMA<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiKey = "";<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(apiUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = await response.json();<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error("API Error Response:", result);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const errorMessage = result?.error?.message || `API Error (Status: ${response.status})`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>addTextMessageToChat("AI", `Sorry, I encountered an error: ${errorMessage}. Please try again.`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>chatHistory.push({ role: "model", parts: [{ text: `[API Error: ${errorMessage}]` }] });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>showTypingIndicator(false);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let aiResponseHandled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (result.candidates &amp;&amp; result.candidates[0] &amp;&amp; result.candidates[0].content &amp;&amp; result.candidates[0].content.parts &amp;&amp; result.candidates[0].content.parts[0]) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const part = result.candidates[0].content.parts[0];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (part.text) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (expectQuizJSON &amp;&amp; payload.generationConfig &amp;&amp; payload.generationConfig.responseMimeType === "application/json") {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>const jsonData = JSON.parse(part.text);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (jsonData.type === "quiz" &amp;&amp; jsonData.questions &amp;&amp; jsonData.questions.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>displayQuiz(jsonData);</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>chatHistory.push({ role: "model", parts: [{ text: `[Quiz Displayed: ${jsonData.quizTitle}]` }] });<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>aiResponseHandled = true;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>} else {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                     </span>addTextMessageToChat("AI", "I tried to create a quiz, but there was an issue with its structure. Let's try a different topic or question.");</p>
+<p class="p1"><span class="Apple-converted-space">                                     </span>chatHistory.push({ role: "model", parts: [{ text: "[AI Error: Invalid quiz JSON structure received from API]" }] });</p>
+<p class="p1"><span class="Apple-converted-space">                                     </span>aiResponseHandled = true;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>} catch (e) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>console.error("JSON Parse Error for quiz:", e, "\nReceived text from AI:", part.text);</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>addTextMessageToChat("AI", "I was trying to prepare a quiz, but there was a formatting problem with it. Could we try discussing the topic a bit more, or perhaps try a different question?");</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>chatHistory.push({ role: "model", parts: [{ text: `[AI Error: Expected quiz JSON, but received text: ${part.text.substring(0,100)}...]` }] });</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>aiResponseHandled = true;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>} else {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>addTextMessageToChat("AI", part.text);</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>chatHistory.push({ role: "model", parts: [{ text: part.text }] });</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>aiResponseHandled = true;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!aiResponseHandled) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                     </span>if (result.promptFeedback &amp;&amp; result.promptFeedback.blockReason) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>let blockMessage = `I'm unable to respond to that. (Reason: ${result.promptFeedback.blockReason}). Could you ask something else?`;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (result.promptFeedback.blockReason === "SAFETY" &amp;&amp; result.promptFeedback.safetyRatings) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const harmfulCategories = result.promptFeedback.safetyRatings.filter(r =&gt; r.probability !== "NEGLIGIBLE" &amp;&amp; r.probability !== "LOW").map(r =&gt; r.category.replace('HARM_CATEGORY_', '')).join(', ');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (harmfulCategories) blockMessage = `I can't respond to that as it touches on sensitive topics (${harmfulCategories}). Please ask another question about health education.`;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>addTextMessageToChat("AI", blockMessage);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>chatHistory.push({ role: "model", parts: [{ text: `[Blocked by API: ${result.promptFeedback.blockReason}]` }] });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>addTextMessageToChat("AI", "Sorry, I couldn't generate a response right now. Please try again.");</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>chatHistory.push({ role: "model", parts: [{ text: "[AI Error: No valid candidate response from API]" }] });</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Fetch/Network or Critical JSON Parsing Error:", error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>addTextMessageToChat("AI", "Sorry, there was a technical problem processing that request. Please check your connection and try again.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>chatHistory.push({ role: "model", parts: [{ text: `[Critical Error: ${error.message}]` }] });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>showTypingIndicator(false);</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>if (currentQuizData === null || (currentQuizData &amp;&amp; currentQuizQuestionIndex &gt;= currentQuizData.questions.length) ) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>userInput.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>sendMessageButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>requestQuizButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
